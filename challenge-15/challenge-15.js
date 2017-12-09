@@ -1,3 +1,4 @@
+(function(){
 /*
 Envolva todo o código desse desafio em uma IIFE.
 Crie um arquivo chamado index.html e adicione esse script ao HTML.
@@ -21,7 +22,25 @@ as seguintes características:
   adicionados à idade original (age). Esse método deverá retornar o objeto
   que será instanciado.
 */
-// ?
+function Person(name, lastName, age){
+    this.name = name;
+    this.lastName = lastName;
+    this.age = age;
+
+    this.getFullName = function(){
+        return this.name + " " + this.lastName;
+    }
+
+    this.getAge = function(){
+        return this.age;
+    }
+
+    this.addAge = function(anos){
+        this.age = age + anos;
+        return this;
+    }
+
+}
 
 /*
 Crie 3 novos objetos usando o construtor acima. Os objetos serão novas
@@ -30,20 +49,29 @@ parâmetros corretamente para o construtor para criar as novas pessoas.
 Mostre as 3 novas pessoas criadas no console (Um console.log por pessoa).
 */
 console.log( 'Novas pessoas criadas à partir de Person:' );
-// ?
+var lucas = new Person("Lucas Dimas","Cavalcante Lopes",27);
+var pessoa2 = new Person("Joao","da Silva",35);
+var pessoa3 = new Person("Belinha","Godofreda",5);
+console.log(lucas);
+console.log(pessoa2);
+console.log(pessoa3);
 
 /*
 Mostre no console o nome completo de cada pessoa.
 */
 console.log( '\nNomes das pessoas:' );
-// ?
+console.log(lucas.getFullName());
+console.log(pessoa2.getFullName());
+console.log(pessoa3.getFullName());
 
 /*
 Mostre no console as idades de cada pessoa, com a frase:
 - "[NOME COMPLETO] tem [IDADE] anos."
 */
 console.log( '\nIdade das pessoas:' );
-// ?
+console.log(lucas.getAge());
+console.log(pessoa2.getAge());
+console.log(pessoa3.getAge());
 
 /*
 Adicione alguns anos à cada pessoa, e mostre no console a nova idade de
@@ -51,4 +79,11 @@ cada um. A frase deverá ser no formato:
 - "[NOME COMPLETO] agora tem [NOVA IDADE] anos."
 */
 console.log( '\nNova idade das pessoas:' );
-// ?
+lucas.addAge(2);
+pessoa2.addAge(5);
+pessoa3.addAge(10);
+console.log(lucas.getFullName() + " agora tem " + lucas.getAge() + " anos.")
+console.log(pessoa2.getFullName() + " agora tem " + pessoa2.getAge() + " anos.")
+console.log(pessoa3.getFullName() + " agora tem " + pessoa3.getAge() + " anos.")
+
+})()
