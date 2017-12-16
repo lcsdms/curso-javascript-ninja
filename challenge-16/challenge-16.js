@@ -1,9 +1,10 @@
+(function(){
 /*
 1. Envolva todo o conteúdo desse desafio em uma IIFE.
 2. Adicione a diretiva 'use strict';
 3. Crie um arquivo index.html e adicione esse script à ele.
 */
-
+'use strict'
 /*
 Declare uma variável chamada `name` que receba seu primeiro nome.
 Mostre no console todas as letras do seu nome separadas, com a frase:
@@ -14,7 +15,10 @@ Ex: no caso do nome ser "Fernando", deve mostrar as frases:
 E assim por diante, até a última.
 */
 console.log( 'As letras do seu nome:' );
-// ?
+var name = 'Lucas'
+name.split('').forEach(function(letra,index){
+    console.log(letra + ' é a ' + (index+1) + 'a letra do meu nome.');
+});
 
 /*
 - Declare uma variável chamada `fullName`, que receba seu nome completo,
@@ -29,7 +33,12 @@ curso para fazer isso funcionar corretamente :)
 console.log para cada formato.
 */
 console.log( '\nNome convertido à partir de um slug:' );
-// ?
+var fullName = 'lucas-dimas-cavalcante-lopes';
+console.log(fullName);
+var resultado = fullName.split('-').reduce(function(valorAnterior,elemento){
+ return valorAnterior += elemento.charAt(0).toUpperCase() + elemento.substring(1) + " ";
+},'');
+console.log(resultado);
 
 /*
 - Crie um array com 5 nomes. Reduza esses nomes a uma única string, separando
@@ -41,21 +50,40 @@ O resultado final deve ficar mais ou menos assim:
 5 nomes foi somente uma sugestão ;)
 */
 console.log( '\nMeus amigos:' );
-// ?
+var amigos = [
+    'Amigo 1',
+    'Amigo 2',
+    'Amigo 3',
+    'Amigo 4',
+    'Amigo 5',
+];
+
+var resultadoAmigos = amigos.reduce(function(valorAnterior, elemento, indiceAtual,array){
+    var separador;
+    if(indiceAtual > 0){
+        separador = indiceAtual === (array.length - 1) ? ' e ' : ', ';
+    }else{
+        separador = '';
+    }
+
+    return valorAnterior + separador + elemento + (indiceAtual + 1 === array.length ? ' são meus amigos.': '')
+},'');
+
+console.log(resultadoAmigos);
 
 /*
 Usando o replace(), faça a string "Roberto" virar "Roberta".
 Mostre o resultado no console.
 */
 console.log( '\nEra "Roberto", agora é:' );
-// ?
+console.log("Roberto".replace("to","ta"));
 
 /*
 Mostre no console a parte "nando" da string "Fernando". Use o método que
 faz a busca do final para o início da string.
 */
 console.log( '\nParte de uma string:' );
-// ?
+console.log("Fernando".slice("Fernando".lastIndexOf('nando')));
 
 /*
 Declare uma variável chamada `myName`, que receba o seu primeiro nome,
@@ -67,4 +95,11 @@ de qualquer tamanho, escrito de qualquer forma.
 Ex.: Nomes que deveriam funcionar: "Fernando", "RoBertO", "gabriEla", etc.
 */
 console.log( '\nNome com letras intercaladas entre caixa alta e baixa:' );
-// ?
+var myName = 'Lucas'
+myName = myName.split('').reduce(function(valorAnterior,elemento,indice){
+    return valorAnterior += indice % 2 === 0 ? elemento.toUpperCase() : elemento.toLowerCase();
+},'');
+
+console.log(myName);
+
+})()
