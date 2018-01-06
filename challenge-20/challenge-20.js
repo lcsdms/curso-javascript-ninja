@@ -1,3 +1,4 @@
+(function(win,doc){
 /*
 1. Envolva todo o conteúdo desse desafio em uma IIFE.
 2. Adicione a diretiva 'use strict';
@@ -7,6 +8,7 @@ a marcação criada nele para fazer nosso desafio ;)
 
 O HTML NÃO PODE ser alterado!
 */
+'use strict'
 
 /*
 Ao carregar a página, pergunte ao usuário "Qual o seu nome?". Atribua o
@@ -14,44 +16,46 @@ resultado à uma variável chamada `username`. Se o usuário não digitar um
 nome, `username` deve receber "Desconhecido".
 Com a resposta, mostre um alert com a mensagem "Bem vindo [USERNAME]!"
 */
-// ?
+var username = prompt("Qual seu nome ?", "Desconhecido");
+alert("Bem vindo " + username + "!");
 
 /*
 Agora, pergunte ao usuário "Qual o seu e-mail?", atribuindo o resultado à
 uma variável chamada `email`.
 */
-// ?
+var email = prompt("Qual o seu e-mail?");
 
 /*
 - Selecione o input de "Nome", atribuindo-o à uma variável chamada
 `$inputUsername`.
 */
-// ?
+var $inputUsername = doc.querySelector("input[type='text']");
 
 /*
 - Selecione o input de "Email", atribuindo-o à uma variável chamada
 `$inputEmail`.
 */
-// ?
+var $inputEmail = doc.querySelector("input[type='email']");
+console.log($inputEmail);
 
 /*
 - Selecione o campo de "Mensagem", atribuindo-o à uma variável chamada
 `$message`.
 */
-// ?
+var $message = doc.querySelector("textarea");
 
 /*
 - Selecione o botão de envio do formulário, atribuindo-o à uma variável
 chamada `$button`.
 */
-// ?
+var $button = doc.querySelector('button');
 
 /*
 Preencha os campos de "Nome" e "Email" que estão no documento com os valores
 entrados pelo usuário.
 */
-// ?
-
+$inputUsername.value = username.valueOf();
+$inputEmail.value = email.valueOf();
 /*
 Adicione um listener de evento de click ao botão que faça o seguinte:
 1. Verificar se todos os campos estão preenchidos:
@@ -76,7 +80,33 @@ Se for confirmado, mostre um alerta com a mensagem:
 Caso contrário, mostre um alerta com a mensagem:
     - "Não enviado."
 */
-// ?
+$button.addEventListener('click',function(event){
+   event.preventDefault();
+   if(!$inputUsername.valueOf()){
+      alert("Preencha o nome do usuário!");
+      return;
+   }
+    if(!$inputEmail.valueOf()){
+        alert("Preencha o e-mail!");
+        return;
+    }
+    if(!$message.valueOf()){
+        alert("Preencha a mensagem!");
+        return;
+    }
+    if(!isValidEmail($inputEmail.value)){
+       alert("Entre com um e-mail válido!");
+       return;
+    }
+
+    if(prompt("Tem certeza que deseja enviar o formulário? ")){
+       alert('Enviado com sucesso!');
+    }else{
+       alert('Não enviado.');
+    }
+
+});
+
 
 /*
 Crie uma função chamada `isValidEmail`, que será usada na validação do
@@ -104,4 +134,9 @@ Alguns e-mails inválidos:
     - "rita-marica@titica.a.b"
     - "agua_@evida.br.com"
 */
-// ?
+
+function isValidEmail(email){
+  var regexp = new RegExp(/(\w+([-_.+])?\w+?)+@[\w+_]+\.\w{2,}(\.\w{2})?/);
+  return !!email.match(regexp);
+}
+})(window,document);
